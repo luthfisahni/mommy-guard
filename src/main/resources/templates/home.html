@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MOMMY-GUARD</title>
+
+    <style>
+        :root {
+            --pink-main: #ff7eb3;
+            --pink-soft: #ffd1e6;
+            --pink-bg: #fff0f6;
+            --safe: #4caf50;
+            --warn: #ffb703;
+            --danger: #ff4d6d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: linear-gradient(180deg, var(--pink-main), var(--pink-soft));
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        /* MAIN CONTAINER */
+        .app {
+            background: white;
+            width: 100%;
+            max-width: 380px;
+            border-radius: 22px;
+            padding: 18px 16px 22px;
+            box-shadow: 0 16px 32px rgba(0,0,0,0.15);
+        }
+
+        /* HEADER */
+        .header {
+            text-align: center;
+            margin-bottom: 14px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 22px;
+            color: #d63384;
+        }
+
+        .header p {
+            margin: 4px 0 0;
+            font-size: 13px;
+            color: #777;
+        }
+
+        /* STATUS */
+        .status {
+            border-radius: 16px;
+            padding: 16px;
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .safe {
+            background: #e8f5e9;
+            color: var(--safe);
+        }
+
+        .warn {
+            background: #fff3cd;
+            color: var(--warn);
+        }
+
+        .danger {
+            background: #ffe5ec;
+            color: var(--danger);
+            animation: pulse 1s infinite;
+        }
+
+        /* PRESSURE */
+        .pressure {
+            margin-bottom: 18px;
+        }
+
+        .pressure h3 {
+            font-size: 14px;
+            margin: 0 0 6px;
+            color: #555;
+        }
+
+        .bar {
+            height: 18px;
+            background: #f1f1f1;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .fill {
+            height: 100%;
+            width: 50%;
+            background: linear-gradient(90deg, #ff8fab, #ff4d6d);
+            transition: width 0.5s ease;
+        }
+
+        /* MESSAGE */
+        .message {
+            background: var(--pink-bg);
+            padding: 14px;
+            border-radius: 14px;
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 16px;
+        }
+
+        /* SESSION */
+        .session {
+            text-align: center;
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* ANIMATIONS */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app" id="app">
+    <div class="header">
+        <h1>👣 MOMMY-GUARD</h1>
+        <p>Pemantauan keseimbangan</p>
+    </div>
+
+    <div class="status safe" id="status">
+        🟢 AMAN
+    </div>
+
+    <div class="pressure">
+        <h3>Kaki Kiri</h3>
+        <div class="bar">
+            <div class="fill" id="leftBar"></div>
+        </div>
+    </div>
+
+    <div class="pressure">
+        <h3>Kaki Kanan</h3>
+        <div class="bar">
+            <div class="fill" id="rightBar"></div>
+        </div>
+    </div>
+
+    <div class="message" id="message">
+        Posisi tubuh stabil. Tetap nyaman bergerak 🌸
+    </div>
+
+    <button id="resumeBtn"
+            onclick="resumeMonitoring()"
+            style="
+            display:none;
+            width:100%;
+            padding:14px;
+            border:none;
+            border-radius:16px;
+            font-size:16px;
+            background:#ff4d6d;
+            color:white;
+            font-weight:700;
+            ">
+        🛑 Saya Sudah Aman, Lanjutkan
+    </button>
+
+    <div class="session">
+        Monitoring aktif...
+    </div>
+</div>
+
+<script>
+        let emergencyStop = false;
+        let alarmPlaying = false;
+
+        const alarm = new Audio(
+        "https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"
+        );
+        alarm.loop = true;
+
+        function resumeMonitoring() {
+        emergencyStop = false;
+        alarm.pause();
+        alarm.currentTime = 0;
+        alarmPlaying = false;
+
+        document.getElementById("resumeBtn").style.display = "none";
+        document.getElementById("message").innerText =
+        "Monitoring dilanjutkan. Harap bergerak perlahan 🌸";
+    }
+
+        function updateUI(left, right) {
+        if (emergencyStop) return; // ⛔ STOP TOTAL
+
+        const status = document.getElementById("status");
+        const message = document.getElementById("message");
+
+        document.getElementById("leftBar").style.width = left + "%";
+        document.getElementById("rightBar").style.width = right + "%";
+
+        const diff = Math.abs(left - right);
+
+        status.className = "status";
+
+        if (diff < 15) {
+        status.classList.add("safe");
+        status.innerText = "🟢 AMAN";
+        message.innerText = "Posisi tubuh stabil. Tetap nyaman bergerak 🌸";
+
+    } else if (diff < 30) {
+        status.classList.add("warn");
+        status.innerText = "🟡 WASPADA";
+        message.innerText =
+        "Perbedaan tekanan terdeteksi. Sesuaikan posisi secara perlahan.";
+
+    } else {
+        // 🔴 BAHAYA → KUNCI SISTEM
+        status.classList.add("danger");
+        status.innerText = "🔴 BAHAYA";
+        message.innerText =
+        "Ketidakseimbangan tinggi! Harap berhenti dan cari pegangan.";
+
+        if (!alarmPlaying) {
+                alarm.play().catch(() => {});
+                alarmPlaying = true;
+            }
+        emergencyStop = true;
+        document.getElementById("resumeBtn").style.display = "block";
+
+    }
+    }
+        /* ngetes */
+        setInterval(() => {
+        if (emergencyStop == true) return;
+        const left = Math.floor(35 + Math.random() * 50);
+        const right = 100 - left;
+        updateUI(left, right);
+    }, 1500);
+</script>
+
+</body>
+</html>
