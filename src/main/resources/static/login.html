@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Mommy Guard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff7eb3, #ffb6d9);
+        }
+
+        .card {
+            width: 350px;
+            background: white;
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+
+        .title {
+            font-size: 26px;
+            font-weight: bold;
+            color: #ff4f93;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: gray;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            text-align: left;
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            font-size: 13px;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #ff4f93;
+            box-shadow: 0 0 5px rgba(255,79,147,0.4);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ff4f93, #ff7eb3);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .footer {
+            margin-top: 15px;
+            font-size: 12px;
+            color: gray;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    <div class="title">👣 MOMMY-GUARD</div>
+    <div class="subtitle">Masuk untuk mulai pemantauan</div>
+
+    <div class="input-group">
+        <label>Email</label>
+        <input type="email" placeholder="masukkan email">
+    </div>
+
+    <div class="input-group">
+        <label>Password</label>
+        <input type="password" placeholder="masukkan password">
+    </div>
+
+    <button class="btn-login">Login</button>
+
+    <div class="footer">
+        Belum punya akun? Daftar
+    </div>
+</div>
+
+</body>
+</html>

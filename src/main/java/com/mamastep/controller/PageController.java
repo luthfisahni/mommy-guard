@@ -7,7 +7,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class PageController {
 
     @GetMapping("/")
-    public String index() {
-        return "home"; // TANPA .html
+    public String root() {
+        return "redirect:/login.html";
     }
+
+    @GetMapping("/dashboard")
+    public String dashboard() {
+        return "redirect:/home.html";
+    }
+}
 }
