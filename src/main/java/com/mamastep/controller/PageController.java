@@ -8,12 +8,11 @@ public class PageController {
 
     @GetMapping("/")
     public String root() {
-        return "redirect:/login.html";
+        return "login";
     }
 
     @GetMapping("/dashboard")
     public String dashboard() {
         return "redirect:/home.html";
     }
-}
 }
