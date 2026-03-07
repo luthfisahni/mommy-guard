@@ -22,12 +22,30 @@
         }
 
         .card {
-            width: 350px;
+            width: 450px;
             background: white;
             border-radius: 25px;
-            padding: 30px;
+            padding: 40px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.15);
             text-align: center;
+        }
+
+        .brand{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap: 15px;
+        }
+
+        .brand img{
+            width:150px;
+        }
+
+        .brand h2{
+            font-size : 28px;
+            color:#ff4f8b;
+            font-weight: bold;
+            white-space: nowrap;
         }
 
         .title {
@@ -97,9 +115,11 @@
 </head>
 
 <body>
-
-<div class="card">
-    <div class="title">👣 MOMMY-GUARD</div>
+<div class="card">  
+    <div class="brand">
+    <img src="/img/logo.png">
+    <h2>MOMMY-GUARD</h2>
+</div>
     <div class="subtitle">Masuk untuk mulai pemantauan</div>
 
     <div class="input-group">
