@@ -22,7 +22,7 @@
         }
 
         .card {
-            width: 450px;
+            width: 350px;
             background: white;
             border-radius: 25px;
             padding: 40px;
@@ -34,11 +34,16 @@
             display:flex;
             align-items:center;
             justify-content:center;
-            gap: 15px;
+            gap: 7px;
         }
 
         .brand img{
-            width:150px;
+            background: none;
+            object-fit: cover;
+            margin-left: -40px;
+            margin-right: -35px;
+            width:120px;
+            height: auto;
         }
 
         .brand h2{
@@ -46,6 +51,7 @@
             color:#ff4f8b;
             font-weight: bold;
             white-space: nowrap;
+            margin: 0;
         }
 
         .title {
@@ -57,7 +63,7 @@
 
         .subtitle {
             font-size: 14px;
-            color: gray;
+            color: #777;
             margin-bottom: 25px;
         }
 
@@ -117,7 +123,7 @@
 <body>
 <div class="card">  
     <div class="brand">
-    <img src="/img/logo.png">
+    <img src="/img/logo.png" alt = "logo">
     <h2>MOMMY-GUARD</h2>
 </div>
     <div class="subtitle">Masuk untuk mulai pemantauan</div>
