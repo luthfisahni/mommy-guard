@@ -1,6 +1,7 @@
 package com.mamastep.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -11,8 +12,11 @@ public class PageController {
         return "login";
     }
 
-    @GetMapping("/dashboard")
+    @PostMapping("/login")
+    public String post() { return "redirect:/home"; }
+
+    @GetMapping("/home")
     public String dashboard() {
-        return "redirect:/home.html";
+        return "home";
     }
 }
